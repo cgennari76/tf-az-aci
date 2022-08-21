@@ -1,0 +1,28 @@
+api-version: 2019-12-01
+location: westus
+name: aci-demo
+properties:
+  containers:
+  - name: my-app
+    properties:
+      image: index.docker.io/chrisgennari/dry-run-cloud:nodeubuntu
+      ports:
+      - port: 80
+        protocol: TCP
+      resources:
+        requests:
+          cpu: 1.0
+          memoryInGB: 1.5
+  imageRegistryCredentials: # Credentials to pull a private image
+  - server: index.docker.io
+    username: chrisgennari
+    password: Solution5inc
+  ipAddress:
+    type: Private
+    ports:
+    - port: 80
+  subnetIds:
+    - id: /subscriptions/34c36943-27ec-47b8-b66c-f2cfe78dd467/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVNet/subnets/myBackendSUB
+  osType: Linux
+tags: null
+type: Microsoft.ContainerInstance/containerGroups
